@@ -1,0 +1,3 @@
+[submodule "fe/NotionClone"]
+	path = fe/NotionClone
+	url = https://github.com/FarhanAR09/NotionClone.git
