@@ -9,14 +9,13 @@ import {
     updateNotePinned,
 } from "../controllers/note.controller.js"
 import { verify } from "jsonwebtoken"
+import { createNote, updateNote } from "../controllers/note_control.js"
 
 const router = express.Router()
 
-router.post("/add", verifyToken, addNote)
-router.post("/edit/:noteID", verifyToken, editNote)
-router.get ("/all", verifyToken, getAllNotes)
-router.delete ("/delete/:noteID", verifyToken, updateNotePinned)
-router.put ("/update-note-pinned/:noteID", verifyToken, updateNotePinned)
-router.get("/search", verifyToken, searchNote)
+router.post("/add", createNote)
+router.post("/edit/:noteID", updateNote)
+router.get ("/all", getAllNotes)
+router.delete ("/delete/:noteID", deleteNote)
 
 export default router
