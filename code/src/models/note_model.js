@@ -12,10 +12,6 @@ const noteSchema =  new mongoose.Schema({
     userID: {
         type: String,
         required: true,
-    },
-    timeCreate: {
-        type: Date, 
-        default: Date.now(),
     }
 })
 
