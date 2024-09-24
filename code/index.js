@@ -31,5 +31,5 @@ app.listen(3000, () => {
 
 
 app.use("/api/users", userRoute);
-app.use("/api/notes", noteRoute);
+app.use("/notes", noteRoute);
 app.use("/auth", authRoute)
