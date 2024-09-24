@@ -9,7 +9,7 @@ const signin = async (req, res) => {
 
         // Find user by username
         const user = await User.findOne({ username });
-        print(username);
+      
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
