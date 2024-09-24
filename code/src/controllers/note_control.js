@@ -33,7 +33,23 @@ exports.deleteNote = async (req, res) => {
 
 exports.getAllNotes = async (req, res) => {
     try {
-        const notes = await Note.find();
+        // Filtering berdasarkan title dan userID
+        const filter = {};
+        if (req.query.title) {
+            filter.title = req.query.title;
+        }
+        if (req.query.userID) {
+            filter.userID = req.query.userID;
+        }
+
+        // Sorting berdasarkan timeCreate atau title
+        let sort = {};
+        if (req.query.sortBy) {
+            const order = req.query.order === 'desc' ? -1 : 1; 
+            sort[req.query.sortBy] = order;
+        }
+
+        const notes = await Note.find(filter).sort(sort);
         res.status(200).send(notes);
     } catch (error) {
         res.status(500).send(error);

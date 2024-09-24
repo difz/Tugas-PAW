@@ -27,3 +27,25 @@ exports.deleteUser = async (req, res) => {
         res.status(500).send(error);
     }
 }
+
+exports.getAllUsers = async (req, res) => {
+  try {
+      // Filtering berdasarkan username
+      const filter = {};
+      if (req.query.username) {
+          filter.username = req.query.username;
+      }
+
+      // Sorting berdasarkan username atau createdAt
+      let sort = {};
+      if (req.query.sortBy) {
+          const order = req.query.order === 'desc' ? -1 : 1; 
+          sort[req.query.sortBy] = order;
+      }
+
+      const users = await User.find(filter).sort(sort);
+      res.status(200).send(users);
+  } catch (error) {
+      res.status(500).send(error);
+  }
+}
