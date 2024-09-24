@@ -1,16 +1,16 @@
 const User = require("../models/user_model");
 
-exports.createUser = async (req, res) => {
-  try {
-    const newUser = new User(req.body);
-    await newUser.save();
-    res.status(201).send(newUser);
-  } catch (error) {
-    res.status(400).send (error);
+const createUser = async (req, res) => {    
+    try {
+        const newUser = new User(req.body);
+        await newUser.save();
+        res.status(201).send(newUser);
+    } catch (error) {
+        res.status(400).send(error);    
     }
 }
-    
-exports.updateUser = async (req, res) => {
+ 
+const updateUser = async (req, res) => {
   try {
     await User.findByIdAndUpdate(req.params.id, req.body);
 
@@ -19,7 +19,7 @@ exports.updateUser = async (req, res) => {
         res.status(400).send(error);
     }
 }
-exports.deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(204).send();
@@ -27,3 +27,32 @@ exports.deleteUser = async (req, res) => {
         res.status(500).send(error);
     }
 }
+
+const getAllUsers = async (req, res) => {
+  try {
+      // Filtering berdasarkan username
+      const filter = {};
+      if (req.query.username) {
+          filter.username = req.query.username;
+      }
+
+      // Sorting berdasarkan username atau createdAt
+      let sort = {};
+      if (req.query.sortBy) {
+          const order = req.query.order === 'desc' ? -1 : 1; 
+          sort[req.query.sortBy] = order;
+      }
+
+      const users = await User.find(filter).sort(sort);
+      res.status(200).send(users);
+  } catch (error) {
+      res.status(500).send(error);
+  }
+}
+
+module.exports = {
+    createUser,
+    updateUser,
+    deleteUser,
+    getAllUsers,
+    };

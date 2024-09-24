@@ -1,5 +1,5 @@
 const Note = require("../models/note_model")
-exports.createNote = async (req, res) => {
+const createNote = async (req, res) => {
     try {
         const newNote = new Note({
             title: req.body.title,
@@ -12,7 +12,7 @@ exports.createNote = async (req, res) => {
         res.status(400).send(error);
     }
 }
-exports.updateNote = async (req, res) => {
+const updateNote = async (req, res) => {
     try {
         await Note.findByIdAndUpdate(req.params.id, req.body);
         res.status(200).send();
@@ -22,7 +22,7 @@ exports.updateNote = async (req, res) => {
     }
 }
 
-exports.deleteNote = async (req, res) => {
+const deleteNote = async (req, res) => {
     try {
         await Note.findByIdAndDelete(req.params.id);
         res.status(204).send();
@@ -31,11 +31,34 @@ exports.deleteNote = async (req, res) => {
     }
 }
 
-exports.getAllNotes = async (req, res) => {
+const getAllNotes = async (req, res) => {
     try {
-        const notes = await Note.find();
+        // Filtering berdasarkan title dan userID
+        const filter = {};
+        if (req.query.title) {
+            filter.title = req.query.title;
+        }
+        if (req.query.userID) {
+            filter.userID = req.query.userID;
+        }
+
+        // Sorting berdasarkan timeCreate atau title
+        let sort = {};
+        if (req.query.sortBy) {
+            const order = req.query.order === 'desc' ? -1 : 1; 
+            sort[req.query.sortBy] = order;
+        }
+
+        const notes = await Note.find(filter).sort(sort);
         res.status(200).send(notes);
     } catch (error) {
         res.status(500).send(error);
     }
 }
+
+module.exports = {
+    createNote,
+    updateNote,
+    deleteNote,
+    getAllNotes,
+};
