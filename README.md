@@ -32,7 +32,7 @@
 | POST        | `http://localhost:3000/user/create`            | create user.                                |
 | GET         | `http://localhost:3000/note/all`               | Get all notes.                              |
 | GET         | `http://localhost:3000/note/all/:userID`       | Get notes by username.                      |
-| GET         | `http://localhost:3000/user/all                | Get all users.                              |
+| GET         | `http://localhost:3000/user/all`               | Get all users.                              |
 | PUT         | `http://localhost:3000/user/update/:id`        | Update users.                               |
 | DELETE      | `http://localhost:3000/note/delete/:noteID`    | Delete Note                                 |
 | DELETE      | `http://localhost:3000/user/delete/:username`  | Delete User                                 |
