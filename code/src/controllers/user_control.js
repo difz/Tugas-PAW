@@ -1,16 +1,26 @@
 const User = require("../models/user_model");
 
-exports.createUser = async (req, res) => {
-  try {
-    const newUser = new User(req.body);
-    await newUser.save();
-    res.status(201).send(newUser);
-  } catch (error) {
-    res.status(400).send (error);
+const createUser = async (req, res) => {    
+    try {
+        const newUser = new User(req.body);
+        await newUser.save();
+        res.status(201).send(newUser);
+    } catch (error) {
+        res.status(400).send(error);    
     }
 }
+
+// exports.createUser = async (req, res) => {
+//   try {
+//     const newUser = new User(req.body);
+//     await newUser.save();
+//     res.status(201).send(newUser);
+//   } catch (error) {
+//     res.status(400).send (error);
+//     }
+// }
     
-exports.updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     await User.findByIdAndUpdate(req.params.id, req.body);
 
@@ -19,7 +29,7 @@ exports.updateUser = async (req, res) => {
         res.status(400).send(error);
     }
 }
-exports.deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(204).send();
@@ -28,7 +38,7 @@ exports.deleteUser = async (req, res) => {
     }
 }
 
-exports.getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
       // Filtering berdasarkan username
       const filter = {};
@@ -49,3 +59,10 @@ exports.getAllUsers = async (req, res) => {
       res.status(500).send(error);
   }
 }
+
+module.exports = {
+    createUser,
+    updateUser,
+    deleteUser,
+    getAllUsers,
+    };
