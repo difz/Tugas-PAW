@@ -56,9 +56,25 @@ const getAllNotes = async (req, res) => {
     }
 }
 
+const getNotesByUsername = async (req, res) => {
+    try {
+        // Cari user berdasarkan username
+        const user = await User.findOne({ username: req.params.username });
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+
+        // Cari catatan berdasarkan userID
+        const notes = await Note.find({ userID: user.username});
+        res.status(200).send(notes);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
 module.exports = {
     createNote,
     updateNote,
     deleteNote,
     getAllNotes,
+    getNotesByUsername
 };

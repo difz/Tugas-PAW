@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-const authSchema = new mongoose.Schema({
-    username: {
+
+const authSchema = mongoose.Schema({
+    usernameA: {
         type: String,
         required: true,
     },
-    password: {
+    passwordA: {
         type: String,
         required: true,
     }
