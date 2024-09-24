@@ -1,4 +1,5 @@
 const Note = require("../models/note_model")
+const mongoose = require("mongoose");
 const createNote = async (req, res) => {
     try {
         const newNote = new Note({
@@ -13,10 +14,14 @@ const createNote = async (req, res) => {
     }
 }
 const updateNote = async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) { 
+        return res.status(400).send("Invalid ID");
+    } 
     try {
         await Note.findByIdAndUpdate(req.params.id, req.body);
         res.status(200).send();
     }
+
     catch (error) {
         res.status(400).send(error);
     }

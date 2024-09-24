@@ -5,8 +5,8 @@ const {createNote, updateNote, deleteNote, getAllNotes} = require("../controller
 
 
 router.post("/", createNote)
-router.post("/:noteID", updateNote)
+router.put("/update/:id", updateNote)
 router.get ("/", getAllNotes)
-router.delete ("/:noteID", deleteNote)
+router.delete ("/:id", deleteNote)
 
 module.exports = router;

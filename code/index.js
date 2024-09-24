@@ -3,8 +3,8 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const productRoute = require('./src/routes/product_route.js');
 const noteRoute = require('./src/routes/note_route.js');
+const authRoute = require('./src/routes/auth_routes.js');
 
 
 //Middleware
@@ -31,6 +31,6 @@ app.listen(3000, () => {
   });
 
 
-app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/notes", noteRoute);
+app.use("/api/auth", authRoute);
