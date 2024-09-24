@@ -5,7 +5,7 @@ const {createNote, updateNote, deleteNote, getAllNotes, getNotesByUsername} = re
 
 
 router.post("/note/create", createNote)
-router.post("/note/:noteID", updateNote)
+router.put("/update/:id", updateNote)
 router.get ("/all", getAllNotes)
 router.get ("/all/:userID", getNotesByUsername)
 router.delete ("/delete/:noteID", deleteNote)

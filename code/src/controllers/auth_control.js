@@ -3,10 +3,12 @@ const bcrypt = require('bcrypt');
 
 
 const signin = async (req, res) => {
-    const { username, password } = req.body;
+    
     try {
+        const { username, password } = req.body;
         // Cari user berdasarkan username
         const user = await User.findOne({ username });
+        print(username);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
