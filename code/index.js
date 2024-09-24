@@ -1,8 +1,10 @@
-const e = require('cors');
+const cors = require('cors');
 const express = require('express'); 
 const app = express();
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
+dotenv.config();
 //MONGO DB CONNECTION
 if (!process.env.MONGO_URI) {
     throw Error("Database connection string not found");
@@ -14,5 +16,11 @@ if (!process.env.MONGO_URI) {
       console.log("Failed to connect to MongoDB");
       console.log(err);
     });
+
+//LOcalhost
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+  });
 
     
