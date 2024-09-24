@@ -1,5 +1,7 @@
 const Note = require("../models/note_model")
-const User = require("../models/user_model");
+const User = require("../models/user_model")
+const Auth = require("../models/auth_model")
+
 const createNote = async (req, res) => {
     try {
         const newNote = new Note({
@@ -76,13 +78,15 @@ const getNoteById = async (req, res) => {
 const getNotesByUsername = async (req, res) => {
     try {
         // Cari user berdasarkan username
-        const user = await User.findOne({ username: req.params.userID });
+        const user = await Auth.findOne({ username: req.params.userID });
+        console.log(user)
         if (!user) {
             return res.status(404).send({ message: 'User not found' });
         }
 
         // Cari catatan berdasarkan userID
         const notes = await Note.find({ userID: req.params.userID});
+        console.log(notes)
         if(!notes){
             res.status(404).send({message: 'Notes not found'})
         }

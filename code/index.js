@@ -1,4 +1,4 @@
-const userRoute = require('./src/routes/user_routes.js');
+
 const express = require('express'); 
 const app = express();
 const dotenv = require('dotenv');
@@ -30,6 +30,6 @@ app.listen(3000, () => {
   });
 
 
-app.use("/users", userRoute);
+
 app.use("/notes", noteRoute);
 app.use("/auth", authRoute)
