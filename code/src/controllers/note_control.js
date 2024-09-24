@@ -1,4 +1,5 @@
 const Note = require("../models/note_model")
+const User = require("../models/user_model");
 const createNote = async (req, res) => {
     try {
         const newNote = new Note({
@@ -55,17 +56,36 @@ const getAllNotes = async (req, res) => {
         res.status(500).send(error);
     }
 }
+const getNoteById = async (req, res) => {
+    try {
+        // Validasi ObjectId
+        const noteId = req.params.noteID;
+
+        // Cari catatan berdasarkan ID
+        const note = await Note.findById(noteId);
+        if (!note) {
+            return res.status(404).send({ message: 'Note not found' });
+        }
+
+        res.status(200).send(note);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
 
 const getNotesByUsername = async (req, res) => {
     try {
         // Cari user berdasarkan username
-        const user = await User.findOne({ username: req.params.username });
+        const user = await User.findOne({ username: req.params.userID });
         if (!user) {
             return res.status(404).send({ message: 'User not found' });
         }
 
         // Cari catatan berdasarkan userID
-        const notes = await Note.find({ userID: user.username});
+        const notes = await Note.find({ userID: req.params.userID});
+        if(!notes){
+            res.status(404).send({message: 'Notes not found'})
+        }
         res.status(200).send(notes);
     } catch (error) {
         res.status(500).send(error);
@@ -76,5 +96,6 @@ module.exports = {
     updateNote,
     deleteNote,
     getAllNotes,
-    getNotesByUsername
+    getNotesByUsername,
+    getNoteById,
 };

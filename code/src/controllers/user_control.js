@@ -22,14 +22,12 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.query.username);
-        (() => {
-            res.status(204).json({
-                message: "User Successfully Deleted"
-            });
-        });
+        res.status(204).json({
+            message: "User Successfully Deleted"
+        }); 
     } catch (error) {
     res.status(500).send(error);
- }
+  }
 }
 
 const getAllUsers = async (req, res) => {
