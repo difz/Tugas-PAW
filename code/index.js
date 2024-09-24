@@ -4,7 +4,7 @@ const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const noteRoute = require('./src/routes/note_route.js');
-
+const authRoute = require('./src/routes/auth_routes.js');
 
 //Middleware
 app.use(express.json());
@@ -32,3 +32,4 @@ app.listen(3000, () => {
 
 app.use("/api/users", userRoute);
 app.use("/api/notes", noteRoute);
+app.use("/auth", authRoute)
