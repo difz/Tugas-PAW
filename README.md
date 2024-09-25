@@ -5,7 +5,14 @@
 3. Farhan Arief Ramadhan (22/497297/TK/54496)
 4. Muhammad Hifzhon Harundoyo (22/498269/TK/54647)
 5. Faundra Pratama Sukma (22/505520/TK/55323)
-   
+## Database
+1. Athaya Harmana Putri (22/492673/TK/53930) (Setup and Connection)
+2. Nur Rochman (22/493623/TK/54086) (Models)
+## Backend
+1. Muhammad Hifzhon Harundoyo (22/498269/TK/54647) (Authentication Routing and Controller)
+2. Faundra Pratama Sukma (22/505520/TK/55323) (Note Routing and Controller)
+## Frontend
+1. Farhan Arief Ramadhan (22/497297/TK/54496) (Frontend and API Requests)
 ## Installation
 1. **Clone the repository**
     ```bash
